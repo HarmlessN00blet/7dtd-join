@@ -1,0 +1,38 @@
+<!-- join-7dtd.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Join via Steam</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    :root { color-scheme: dark light; }
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial,sans-serif;margin:2rem;line-height:1.5}
+    .btn{display:inline-block;padding:.8rem 1.2rem;border:1px solid #888;border-radius:.6rem;text-decoration:none}
+    code{background:#0001;padding:.2rem .4rem;border-radius:.3rem}
+  </style>
+</head>
+<body>
+  <h1>Opening Steam…</h1>
+  <p>If nothing happens in a couple seconds, click the button below.</p>
+  <p id="info"></p>
+  <p><a id="fallback" class="btn" href="#">Open in Steam</a></p>
+
+  <script>
+    const p = new URLSearchParams(location.search);
+    const ip = p.get("ip") || "83.223.207.104";
+    const port = p.get("port") || "27000";
+    const steam = `steam://connect/${ip}:${port}`;
+
+    document.getElementById("info").innerHTML =
+      `Server: <code>${ip}:${port}</code>`;
+
+    const a = document.getElementById("fallback");
+    a.href = steam;
+    a.textContent = `Open in Steam (${ip}:${port})`;
+
+    // Try to open Steam automatically
+    setTimeout(() => { window.location.href = steam; }, 100);
+  </script>
+</body>
+</html>
